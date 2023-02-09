@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
+import LoadingScreen from '../shared/LoadingScreen'
 
 // api function from our api file
 import { getAllExercise } from '../../api/exercises'
@@ -45,7 +46,7 @@ const ExerciseIndex = (props) => {
 
     if (!exercise) {
         // if no exercise loaded yet, display 'loading'
-        return <p>...loading ...please wait</p>
+        return <LoadingScreen />
     } else if (exercise.length === 0) {
         // otherwise if there ARE no exercise, display that message
         return <p>No exercises yet, go add some!</p>
@@ -60,6 +61,11 @@ const ExerciseIndex = (props) => {
                 <Card.Text>
                     <Link to={`/exercise/${exercise.id}`} className="btn btn-info">View { exercise.name }</Link>
                 </Card.Text>
+                { exercise.owner ?
+                <Card.Footer>
+                     owner: {exercise.owner.email} 
+                </Card.Footer>
+                : null}
             </Card.Body>
         </Card>
     ))

@@ -9,6 +9,8 @@ import { getOneExercise } from '../../api/exercises'
 
 import messages from '../shared/AutoDismissAlert/messages'
 
+import LoadingScreen from '../shared/LoadingScreen'
+
 // we need to get the exercise's id from the route parameters
 // then we need to make a request to the api
 // when we retrieve a exercise from the api, we'll render the data on the screen
@@ -35,12 +37,12 @@ const ShowExercise = (props) => {
     }, [])
 
     if(!exercise) {
-        return <p>loading...</p>
+        return <LoadingScreen />
     }
 
     return (
         <>
-            <Container>
+            <Container className="m-2">
                 <Card>
                     <Card.Header>{ exercise.fullTitle }</Card.Header>
                     <Card.Body>

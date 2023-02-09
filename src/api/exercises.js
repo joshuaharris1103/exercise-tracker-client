@@ -13,6 +13,18 @@ export const getOneExercise = (id) => {
 }
 
 // Create (create a exercise)
+export const createExercise = (user, newExercise) => {
+    console.log('this is the user', user)
+    console.log('this is the newExercise', newExercise)
+    return axios({
+        url: `${apiUrl}/exercises`,
+        method: 'POST',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        },
+        data: { exercise: newExercise }
+    })
+}
 
 // Update (update a exercise)
 
