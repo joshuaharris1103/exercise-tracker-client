@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
 
 // api function from our api file
-import { getAllExercise } from '../../api/exercise'
+import { getAllExercise } from '../../api/exercises'
 
 // need our messages from our autodismissalert directory
 import messages from '../shared/AutoDismissAlert/messages'
