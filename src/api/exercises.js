@@ -29,3 +29,12 @@ export const createExercise = (user, newExercise) => {
 // Update (update a exercise)
 
 // Delete (delete a exercise)
+export const removeExercise = (user, exerciseId) => {
+    return axios({
+        url: `${apiUrl}/exercises/${exerciseId}`,
+        method: 'DELETE',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        }
+    })
+}

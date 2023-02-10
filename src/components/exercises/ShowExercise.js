@@ -1,25 +1,15 @@
 import { useState, useEffect } from 'react'
-
-// useParams from react-router-dom allows us to see our route parameters
-import { useParams } from 'react-router-dom'
-
+import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Card, Button } from 'react-bootstrap'
-
-import { getOneExercise } from '../../api/exercises'
-
+import { getOneExercise, removeExercise } from '../../api/exercises'
 import messages from '../shared/AutoDismissAlert/messages'
-
 import LoadingScreen from '../shared/LoadingScreen'
 
-// we need to get the exercise's id from the route parameters
-// then we need to make a request to the api
-// when we retrieve a exercise from the api, we'll render the data on the screen
 
 const ShowExercise = (props) => {
     const [exercise, setExercise] = useState(null)
-
     const { id } = useParams()
-
+    const navigate = useNavigate()
     const { user, msgAlert } = props
     console.log('user in ShowExercise props', user)
     console.log('msgAlert in ShowExercise props', msgAlert)
@@ -30,11 +20,33 @@ const ShowExercise = (props) => {
             .catch(err => {
                 msgAlert({
                     heading: 'Error getting exercises',
-                    message: messages.getExercisesFailure,
+                    message: messages.getExerciseFailure,
                     variant: 'danger'
                 })
             })
     }, [])
+
+    
+    const deleteExercise = () => {
+        removeExercise(user, exercise.id)
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: messages.removeExerciseSuccess,
+                    variant: 'success'
+                })
+            })
+            .then(() => {navigate('/')})
+            
+            .catch(err => {
+                msgAlert({
+                    heading: 'Error',
+                    message: messages.removeExerciseFailure,
+                    variant: 'danger'
+                })
+            })
+    }
+
 
     if(!exercise) {
         return <LoadingScreen />
@@ -57,6 +69,20 @@ const ShowExercise = (props) => {
                             </div>
                         </Card.Text>
                     </Card.Body>
+                    <Card.Footer>
+                        { exercise.owner && user && exercise.owner._id === user._id ?
+                            <>
+                                <Button 
+                                    className="m-2" variant="danger"
+                                    onClick={() => deleteExercise()}
+                                >
+                                    Remove {exercise.name}
+                                </Button>
+                            </>
+                            :
+                            null
+                        }
+                    </Card.Footer>
                 </Card>
             </Container>
         </>

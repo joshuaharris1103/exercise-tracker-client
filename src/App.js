@@ -12,7 +12,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import ShowExercise from './components/exercises/ShowExercise'
-import CreateExercise from './components/exercises/CreateExercise'
+import CreateExercise from './components/exercises/CreateExercise.js'
 
 const App = () => {
 

@@ -1,6 +1,0 @@
-
-const CreateExercise = (props) => {
-    return <p>create pet page</p>
-}
-
-export default CreateExercise
