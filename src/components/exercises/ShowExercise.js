@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Card, Button } from 'react-bootstrap'
-import { getOneExercise, removeExercise } from '../../api/exercises'
+import { getOneExercise, removeExercise, updateExercise } from '../../api/exercises'
 import messages from '../shared/AutoDismissAlert/messages'
 import LoadingScreen from '../shared/LoadingScreen'
 

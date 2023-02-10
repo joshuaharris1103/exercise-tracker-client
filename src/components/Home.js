@@ -10,7 +10,7 @@ const Home = (props) => {
 			<h2>Home Page</h2>
 			<h2>See All The Exercises</h2>
 			<ExerciseIndex msgAlert={ props.msgAlert } />
-		</ Container>
+		</Container>
 	)
 }
 

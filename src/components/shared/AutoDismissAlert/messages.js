@@ -9,6 +9,8 @@ const messages = {
 	getExerciseFailure: 'Failed to Pump iron. No Exercises retrieved!',
 	createExerciseSuccess: 'New Exercise has been imported!',
 	createExerciseFailure: 'Check inputs again.',
+	updateExerciseSuccess: 'Nice! Exercise has been updated!',
+	updateExerciseFailure: 'Failed to update, please try again',
 	removeExerciseSuccess: 'This exercise has been successfully removed!',
 	removeExerciseFailure: 'Something went wrong, please try again'
 }

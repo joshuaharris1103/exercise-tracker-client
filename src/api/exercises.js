@@ -3,7 +3,7 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // READ -> Index
-export const getAllExercise = () => {
+export const getAllExercises = () => {
     return axios(`${apiUrl}/exercises`)
 }
 
@@ -27,7 +27,16 @@ export const createExercise = (user, newExercise) => {
 }
 
 // Update (update a exercise)
-
+export const updateExercise = (user, updatedPet) => {
+    return axios({
+        url: `${apiUrl}/exercise/${updatedPet.id}`,
+        method: 'PATCH',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        },
+        data: { pet: updatedPet }
+    })
+}
 // Delete (delete a exercise)
 export const removeExercise = (user, exerciseId) => {
     return axios({
