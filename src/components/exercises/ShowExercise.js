@@ -4,10 +4,13 @@ import { Container, Card, Button } from 'react-bootstrap'
 import { getOneExercise, removeExercise, updateExercise } from '../../api/exercises'
 import messages from '../shared/AutoDismissAlert/messages'
 import LoadingScreen from '../shared/LoadingScreen'
+import EditExerciseModal from './EditExerciseModal.js'
 
 
 const ShowExercise = (props) => {
     const [exercise, setExercise] = useState(null)
+    const [editModalShow, setEditModalShow] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
     const { user, msgAlert } = props
@@ -24,7 +27,7 @@ const ShowExercise = (props) => {
                     variant: 'danger'
                 })
             })
-    }, [])
+    }, [updated])
 
     
     const deleteExercise = () => {
@@ -72,6 +75,12 @@ const ShowExercise = (props) => {
                     <Card.Footer>
                         { exercise.owner && user && exercise.owner._id === user._id ?
                             <>
+                                   <Button 
+                                    className="m-2" variant="warning"
+                                    onClick={() => setEditModalShow(true)}
+                                >
+                                    Edit {exercise.name}
+                                </Button>
                                 <Button 
                                     className="m-2" variant="danger"
                                     onClick={() => deleteExercise()}
@@ -85,6 +94,15 @@ const ShowExercise = (props) => {
                     </Card.Footer>
                 </Card>
             </Container>
+            <EditExerciseModal 
+                user={user}
+                show={editModalShow}
+                handleClose={() => setEditModalShow(false)}
+                updateExercise={updateExercise}
+                msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+                exercise={exercise}
+            />
         </>
     )
 }

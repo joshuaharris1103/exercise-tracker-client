@@ -37,6 +37,7 @@ export const updateExercise = (user, updatedPet) => {
         data: { pet: updatedPet }
     })
 }
+
 // Delete (delete a exercise)
 export const removeExercise = (user, exerciseId) => {
     return axios({
